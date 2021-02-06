@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "285082835228",
+    "project_id": "immunize-c624b",
+    "storage_bucket": "immunize-c624b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285082835228:android:2f6710269d32bad96182d9",
+        "android_client_info": {
+          "package_name": "com.covid.immunize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285082835228-3nmgqvgn63krqvtrvijvsh8gjecr2d6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnkwR1Uv5P8-3D1J2OJ9Yl7Q-Pw1M0DNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285082835228-3nmgqvgn63krqvtrvijvsh8gjecr2d6c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
