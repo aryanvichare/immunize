@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:immunize/services/firebase_auth_service.dart';
 import 'package:provider/provider.dart';
 
-class Signup extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _SignupState createState() => _SignupState();
+  _LoginState createState() => _LoginState();
 }
 
-class _SignupState extends State<Signup> {
-  TextEditingController nameController;
+class _LoginState extends State<Login> {
   TextEditingController emailController;
   TextEditingController passwordController;
 
@@ -16,14 +15,13 @@ class _SignupState extends State<Signup> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    nameController = new TextEditingController();
     emailController = new TextEditingController();
     passwordController = new TextEditingController();
   }
 
-  Future<void> createUserWithEmailAndPassword(BuildContext context) async {
+  Future<void> loginWithEmailAndPassword(BuildContext context) async {
     final auth = Provider.of<FirebaseAuthService>(context, listen: false);
-    final user = await auth.createUserWithEmailAndPassword(
+    final user = await auth.signInWithEmailAndPassword(
         emailController.text.trim(), passwordController.text.trim());
     
     if (user != null) {
@@ -41,19 +39,12 @@ class _SignupState extends State<Signup> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                "Create an account",
+                "Welcome!",
                 style: TextStyle(color: Color.fromARGB(255, 45, 76, 198), fontSize: 24, fontWeight: FontWeight.w700),
               ),
               Text(
-                "Start your rescue now",
+                "Sign in to continue",
                 style: TextStyle(color: Color.fromARGB(255, 196, 196, 196), fontSize: 12, fontWeight: FontWeight.w400)
-              ),
-              TextFormField(
-                controller: nameController,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  prefixIcon: Icon(Icons.emoji_emotions_outlined)
-                )
               ),
               TextFormField(
                 controller: emailController,
@@ -71,23 +62,17 @@ class _SignupState extends State<Signup> {
                 obscureText: true,
               ),
               ElevatedButton(
-                onPressed: () { createUserWithEmailAndPassword(context); },
-                child: Text('Sign up', style: TextStyle(fontSize: 20))
+                onPressed: () { loginWithEmailAndPassword(context); },
+                child: Text('Login', style: TextStyle(fontSize: 20))
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Already have an account?",
-                      style: TextStyle(color: Color.fromARGB(255, 196, 196, 196), fontSize: 12, fontWeight: FontWeight.w400)
-                    )
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Color.fromARGB(255, 235, 235, 235)),
-                    onPressed: () { Navigator.pushNamed(context, '/login'); },
-                    child: Text('Login', style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 45, 76, 198)))
-                  ),
-                ]
+              TextButton(
+                onPressed: () { /* TODO */},
+                child: Text('Forgot Password')
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Color.fromARGB(255, 235, 235, 235)),
+                onPressed: () { Navigator.pushNamed(context, '/signup'); },
+                child: Text('Sign up', style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 45, 76, 198)))
               )
             ]
           )

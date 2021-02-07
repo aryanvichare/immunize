@@ -2,22 +2,36 @@ import 'package:flutter/material.dart';
 
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
-import 'package:immunize/screens/homepage.dart';
 import 'package:immunize/utils/constants.dart';
+import 'package:immunize/auth.dart';
+import 'package:immunize/login.dart';
+import 'package:immunize/services/firebase_auth_service.dart';
 import 'package:immunize/signup.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(
-    title: 'Immunize',
-    theme: ThemeData(
-        primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.white),
-    initialRoute: '/',
-    routes: {
-      '/': (context) => App(),
-      '/signup': (context) => Signup(),
-    },
-  ));
+  runApp(MultiProvider(
+      providers: [
+        Provider<FirebaseAuthService>(
+          create: (_) => FirebaseAuthService(),
+        )
+      ],
+      child: MaterialApp(
+        title: APP_NAME,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.white
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => App(),
+          '/signup': (context) => Signup(),
+          '/login': (context) => Login()
+        },
+      )
+    )
+  );
 }
 
 class App extends StatelessWidget {
@@ -26,7 +40,24 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: APP_NAME, home: Homepage());
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        /*if (snapshot.hasError) {
+          return SomethingWentWrong();
+        }*/
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return AuthWidget();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return Loading();
+      },
+    );
   }
 }
 
