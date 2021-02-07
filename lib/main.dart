@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
-
-import 'package:immunize/landing.dart';
+import 'package:immunize/screens/homepage.dart';
+import 'package:immunize/utils/constants.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,24 +16,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      // Initialize FlutterFire:
-      future: _initialization,
-      builder: (context, snapshot) {
-        // Check for errors
-        /*if (snapshot.hasError) {
-          return SomethingWentWrong();
-        }*/
-
-        // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Landing();
-        }
-
-        // Otherwise, show something whilst waiting for initialization to complete
-        return Loading();
-      },
-    );
+    return MaterialApp(title: APP_NAME, home: Homepage());
   }
 }
 
@@ -41,8 +24,8 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-            color: Color.fromARGB(255, 45, 76, 198),
-            child: Image(image: AssetImage('assets/images/immunize.png')),
-          );
+      color: Color.fromARGB(255, 45, 76, 198),
+      child: Image(image: AssetImage('assets/images/immunize.png')),
+    );
   }
 }
