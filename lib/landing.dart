@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Landing extends StatelessWidget {
-  void _login() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

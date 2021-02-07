@@ -24,7 +24,7 @@ class _SignupState extends State<Signup> {
   Future<void> createUserWithEmailAndPassword(BuildContext context) async {
     final auth = Provider.of<FirebaseAuthService>(context, listen: false);
     final user = await auth.createUserWithEmailAndPassword(
-        emailController.text.trim(), passwordController.text.trim());
+        emailController.text.trim(), passwordController.text.trim(), nameController.text.trim());
     
     if (user != null) {
       Navigator.pushNamed(context, '/' );

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:immunize/landing.dart';
 import 'package:immunize/main.dart';
@@ -21,7 +20,7 @@ class _AuthWidgetState extends State<AuthWidget> {
   Widget build(BuildContext context) {
     final authService =
         Provider.of<FirebaseAuthService>(context, listen: false);
-    return StreamBuilder<User>(
+    return StreamBuilder<AppUser>(
       stream: authService.onAuthStateChanged,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
@@ -32,6 +31,9 @@ class _AuthWidgetState extends State<AuthWidget> {
               children: <Widget>[
                 Text(user.uid),
                 Text(user.email),
+                Text(user.name == null ? 'No Name' : user.name),
+                Text(user.avatar == null ? 'No Avatar' : user.name),
+                Text(user.registered.toString()),
                 ElevatedButton(
                   onPressed: () { authService.signOut(); }, 
                   child: Text("Log Out")

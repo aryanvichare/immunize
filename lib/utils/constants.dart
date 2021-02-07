@@ -1,6 +1,5 @@
 // Name of our app
 import 'package:flutter/material.dart';
-import 'package:immunize/utils/hex_color.dart';
 
 final String APP_NAME = 'Immunize';
 
