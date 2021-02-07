@@ -4,8 +4,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 class Landing extends StatelessWidget {
   void _login() {}
 
-  void _register() {}
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,10 +29,14 @@ class Landing extends StatelessWidget {
                   children: <Widget>[
                     Expanded(child: Rotator()),
                     ElevatedButton(
-                        onPressed: _login,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
                         child: Text('Login', style: TextStyle(fontSize: 20))),
                     TextButton(
-                        onPressed: _register,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/signup');
+                        },
                         child: Text('Register', style: TextStyle(fontSize: 20)))
                   ]),
             )));
@@ -45,7 +47,7 @@ class Rotator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      options: CarouselOptions(),
+      options: CarouselOptions(height: 400.0),
       items: [
         Image(image: AssetImage('assets/images/rotate1.png')),
         Image(image: AssetImage('assets/images/rotate2.png')),

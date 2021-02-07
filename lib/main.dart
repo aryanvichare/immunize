@@ -4,10 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:immunize/screens/homepage.dart';
 import 'package:immunize/utils/constants.dart';
+import 'package:immunize/signup.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(App());
+  runApp(MaterialApp(
+    title: 'Immunize',
+    theme: ThemeData(
+        primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.white),
+    initialRoute: '/',
+    routes: {
+      '/': (context) => App(),
+      '/signup': (context) => Signup(),
+    },
+  ));
 }
 
 class App extends StatelessWidget {
@@ -24,7 +34,7 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 45, 76, 198),
+      color: Colors.white, //Color.fromARGB(255, 45, 76, 198),
       child: Image(image: AssetImage('assets/images/immunize.png')),
     );
   }
