@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
+import 'package:immunize/register.dart';
+import 'package:immunize/services/file_storage_service.dart';
 import 'package:immunize/utils/constants.dart';
 import 'package:immunize/auth.dart';
 import 'package:immunize/login.dart';
@@ -15,7 +17,10 @@ void main() {
       providers: [
         Provider<FirebaseAuthService>(
           create: (_) => FirebaseAuthService(),
-        )
+        ),
+        Provider<FirebaseStorageService>(
+            create: (_) => FirebaseStorageService()
+        ),
       ],
       child: MaterialApp(
         title: APP_NAME,
@@ -27,7 +32,8 @@ void main() {
         routes: {
           '/': (context) => App(),
           '/signup': (context) => Signup(),
-          '/login': (context) => Login()
+          '/login': (context) => Login(),
+          '/register': (context) => CameraRegister()
         },
       )
     )

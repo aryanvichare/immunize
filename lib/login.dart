@@ -25,7 +25,10 @@ class _LoginState extends State<Login> {
         emailController.text.trim(), passwordController.text.trim());
     
     if (user != null) {
-      Navigator.pushNamed(context, '/' );
+      if (user.registered != null)
+        Navigator.pushNamed(context, '/' );
+      else
+        Navigator.pushNamed(context, '/register');
     }
   }
 
